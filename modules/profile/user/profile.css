@@ -1,0 +1,143 @@
+.navbar-brand{
+    padding: 0!important;
+}
+.navbar-brand > img {
+    top:0px;
+    max-width: 85px;
+    top:-15px;
+    position: absolute;
+}
+.form-control:read-only{
+    background-image: none;
+}
+.form-account .form-group{
+    margin-bottom: 0;
+}
+.form-control:hover{
+    cursor: pointer;
+}
+.text-tab{
+    font-size: 20px;
+    background-image: none;
+}
+.form-account .bmd-form-group{
+    padding-top: 0;
+}
+.form-account .form-group > input::placeholder{
+    font-size: 20px;
+}
+.profile-page .profile-tabs {
+    margin-top: 0;
+}
+.profile-page .gallery {
+margin-top: 0;
+}
+.card-body > .row{
+    padding: 3px;
+}
+.navbar.navbar-transparent .text-header{
+    color: white!important;
+}
+.navbar.navbar-transparent input.text-header::placeholder{
+    color: white!important;
+}
+.text-header{
+    color: black!important;
+}
+
+.card .card-header:not([class*="header-"]) {
+    box-shadow: none;
+}
+.card .card-header {
+    background: none;
+    border-bottom: 2px solid gray;
+    color: darkorchid;
+}
+.nav-tabs .nav-item .nav-link{
+    color: darkorchid!important;
+}
+.nav-tabs .nav-item .nav-link.active {
+    background-color: hsl(290, 100%, 80%);
+    transition: 0.3s background-color 0.2s;
+}
+.nav-tabs .nav-item .nav-link, .nav-tabs .nav-item .nav-link:focus, .nav-tabs .nav-item .nav-link:hover {
+    border: 0!important;
+    color: #9c27b0!important;
+    font-weight: 500;
+}
+
+.text-account{
+    color: black!important;
+    font-size: 20px!important;
+}
+.form-account .row{
+    margin-bottom: 5px;
+}
+
+.same-card{
+    box-shadow: none!important;
+}
+.same-title{
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+}
+.same-title:hover{
+    color: #9c27b0;
+    cursor: pointer;
+}
+.price{
+    font-weight: bold;
+}
+.same-text{
+    margin: 0;
+}
+.check-all >.form-check-label{
+    color: black;
+    font-size: 15px;
+}
+.check-all {
+margin-bottom: 0;
+}
+.text-delete{
+    font-size: 15px;
+    font-weight: bold;
+}
+.check-card{
+    position: absolute;
+    right: 0px;
+    z-index: 0;
+}
+.card .form-check {
+    margin-top: 0px;
+}
+.edit-card{
+    position: absolute;
+    left:5px;
+    top:10px;
+}
+.edit-card .form-check-label {
+    cursor: pointer;
+    padding-left: 0;
+    position: relative;
+    font-size: 20px;
+}
+
+.edit-card .form-check-label a:hover i{
+    background-color: #9c27b0!important;
+    color: white!important;
+    border: 3px solid brown;
+}
+.edit-card .form-check-label a i{
+    background-color: white!important;
+    color: brown!important;
+    border: 3px solid brown;
+    font-size: 20px;
+}
+.form-edit{
+    border: 2px solid gray;
+}
+.form-edit form{
+    padding: 20px;
+}

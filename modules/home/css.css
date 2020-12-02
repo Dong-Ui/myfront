@@ -1,0 +1,114 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.margin-auto{
+    margin: 0 auto;
+}
+.block{
+    display: block;
+}
+
+.owl-nav{
+    position: absolute;
+    font-size: 50px;
+    top: 30%;
+    width: 100%;
+}
+.owl-prev{
+    position: absolute;
+    float: left;
+    left: -40px;
+    border: 5px solid black;
+    background-color:white!important;
+    border-radius: 50%!important;
+    height: 50px;
+    width:50px;
+    opacity: 0.5;
+    box-shadow: 0 0 7px -4px #000;
+}
+
+.owl-next{
+    position: absolute;
+    float: right;
+    right: -40px; 
+    border: 5px solid black;
+    background-color:white!important;
+    border-radius: 50%!important;
+    height: 50px;
+    width:50px;
+    box-shadow: 0 0 7px -4px #000;
+}
+.owl-prev:hover{
+    color: black!important;
+}
+.owl-next:hover{
+    color: black!important;
+}
+.owl-dots{
+    display: none;
+}
+
+input[type="datetime-local"] {
+    position: relative;
+    padding: 10px;
+}
+
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+  }
+
+  input[type="datetime-local"]:before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    /* This is the calendar icon in FontAwesome */
+    width: 15px;
+    height: 20px;
+    position: absolute;
+    top: 12px;
+    right: 6px;
+    color: white;
+  }
+  .navbar-brand{
+      padding: 0!important;
+  }
+  .navbar-brand > img {
+      top:0px;
+      max-width: 85px;
+      top:-15px;
+      position: absolute;
+  }
+  .font-logo{
+    font-family: 'Nerko One', cursive;
+    
+  }
+  .color-logo{
+    color: #9c27b0;
+  }
+  .user:hover{
+    color: #9c27b0!important;
+}
+
+.bmd-form-group{
+    padding-top: 0;
+}
+.navbar.navbar-transparent .text-header{
+    color: white!important;
+}
+.navbar.navbar-transparent input.text-header::placeholder{
+    color: white!important;
+}
+.text-header{
+    color: black!important;
+}
+.service{
+    padding: 0;
+}
+.service > .col-sm-3 > .card{
+    margin-top: 10px;
+}

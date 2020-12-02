@@ -1,0 +1,22 @@
+.form-group > .row{
+    padding: 0.5rem 0rem;
+}
+.form-group {
+    margin-bottom: 0rem;
+}
+.navbar-brand{
+    padding: 0px!important;
+}
+.navbar-brand > img {
+    top:0px;
+    max-width: 85px;
+}
+.collapse {
+    padding: 10px 0px!important;
+}
+.navbar-nav li a{
+    font-size: 20px;
+}
+.navbar-nav li {
+    margin: 0 10px;
+}
