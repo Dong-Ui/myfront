@@ -13,24 +13,28 @@
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS -->
-    <link href="../../assets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
-
-
-    <link rel="stylesheet" href="../../owlcarousel/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="../../owlcarousel/assets/owl.theme.default.min.css">
+    <link href="/assets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
+    <link rel="stylesheet" href="/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/owlcarousel/assets/owl.theme.default.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../../owlcarousel/owl.carousel.min.js"></script>
+    <script src="/owlcarousel/owl.carousel.min.js"></script>
     <link rel="stylesheet" href="post.css">
+
+    <!--Angular-->
+    <script src="/js/angular.min.js"></script>
+
+    <!--JavaScipt-->
+    <script src="post.js"></script>
 
 </head>
 
-<body>
+<body ng-app="WebApp" ng-controller="postCtrl">
     <div>
         <nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100">
-            <div class="container"  style="max-width: 90%;">
+            <div class="container" style="max-width: 90%;">
                 <div class="navbar-translate">
                     <a class="navbar-brand font-weight-bold" href="#">
-                        <img src="../../img/logo.png" alt=""></a>
+                        <img src="/images/logo.png" alt=""></a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -52,7 +56,7 @@
                             <input type="text" class="form-control text-header" placeholder="Bạn muốn đi đâu?">
                         </div>
                     </div>
-                    <div class="col-sm-2" >
+                    <div class="col-sm-2">
                         <div class="input-group ">
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-header">
@@ -60,13 +64,13 @@
                                 </span>
                             </div>
                             <input type="text" placeholder="dd/mm/yyyy"
-                            class="form-control datetimepicker text-header" />
+                                class="form-control datetimepicker text-header" />
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <button class="btn btn-primary">Tìm kiếm</button>
                     </div>
-                    <ul class="navbar-nav ml-auto">                                    
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,28 +91,12 @@
 
     <div class="container slide">
         <div class="owl-carousel owl2 owl-theme">
-            <div class="item position-relative" style="width: 100%!important;">
+            <div class="item position-relative" ng-repeat="item in post['images']">
                 <a class="img-post">
-                    <img src="https://cdn.luxstay.com/rooms/25042/large/room_25042_173_1569822344.jpg" alt="">
+                    <img src="{{item}}" alt="">
                 </a>
             </div>
-            <div class="item position-relative">
-                <a class="img-post" href="">
-                    <img src="https://cdn.luxstay.com/rooms/25042/large/room_25042_191_1569822358.jpg" alt="">
-
-                </a>
-            </div>
-            <div class="item position-relative">
-                <a class="img-post" href="">
-                    <img src="https://cdn.luxstay.com/rooms/25042/large/room_25042_190_1569822357.jpg" alt="">
-
-                </a>
-            </div>
-            <div class="item position-relative">
-                <a class="img-post" href="">
-                    <img src="https://cdn.luxstay.com/rooms/25042/large/room_25042_176_1569822346.jpg" alt="">
-                </a>
-            </div>
+           
         </div>
     </div>
     <div class="container">
@@ -116,152 +104,35 @@
             <div class="col-sm-8">
                 <nav aria-label="breadcrumb " role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:;">Trang Chu</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:;">
-                                Ba Ria Vung Tau</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Vung Tau</li>
+                        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{post["province"]}}</li>
                     </ol>
                 </nav>
                 <div class="title_post">
-                    <h1 class="title">The Avis Apartments - Deluxe Exclusive</h1>
+                    <h1 class="title">{{post["title"]}}</h1>
                 </div>
                 <div class="address">
                     <p>
                         <i class="material-icons text-gray">room</i>
-                        Vũng Tàu, Bà Rịa Vũng Tàu, Vietnam
+                        {{post["address"]}}
                     </p>
                     <p>
                         <i class="material-icons text-gray">apartment</i>
-                        Căn hộ dịch vụ · 35 m2
+                        Căn hộ dịch vụ · {{post["size"]}} m2
                     </p>
                 </div>
                 <div class="size">
-                    <p>Phòng riêng · 1 Phòng tắm · 2 giường · 1 phòng ngủ · 4 khách (tối đa 4 khách) </p>
+                    <p>{{post["restRooms"]}} Phòng tắm · {{post["bedRooms"]}} phòng ngủ · {{post["maxGuest"]}} khách</p>
                 </div>
                 <div id="summary">
                     <p class="collapse" id="collapseSummary">
-                        The Avis Apartments - Deluxe Exclusive có diện tích 35m2 với thiết kế hiện đại. Cung cấp cho bạn
-                        đầy
-                        đủ những tiện nghi hiện đại, thoải mái. Nội thất gỗ và hệ thống cây xanh trong nhà giúp bạn có
-                        một
-                        không gian xanh thoải mái nhất.
+                        {{post["content"]}}
+                    </p>
 
-                        Bạn gặp vấn đề ở đâu? Về chỗ ở của chúng tôi, về các vật dụng trong nhà hay bất cứ vấn đề gì bạn
-                        cũng có thể liên lạc trực tiếp với chúng tôi nhé. Tôi rất sẵn lòng để giúp đỡ bạn.
-
-                        Tôi cũng có thể giúp bạn thuê xe đạp hoặc chia sẻ với bạn những địa điểm ăn uống và mua sắm tốt
-                        ở
-                        địa phương với mức giá hợp lý. Hãy hỏi chúng tôi bất cứ điều gì đang thắc mắc nhé!
-
-                        Chỗ ở của chúng tôi nằm ở tâm thành phố và gần nhiều điểm tham quan du lịch nổi tiếng:
-
-                        - Cách Bạch Dinh khoảng 3,8 km
-
-                        - Cách ngọn hải đăng Vũng Tàu khoảng 5 km
-
-                        - Cách sân bay Quốc tế Tân Sơn Nhất khoảng 107 km
-
-                        - Cách tượng Chúa Ki-tô Vua khoảng 2,3 km
-
-                        - Cách Mũi Nghinh Phong khoảng 2,5 km</p>
                     <a class="collapsed" data-toggle="collapse" href="#collapseSummary" aria-expanded="false"
                         aria-controls="collapseSummary"></a>
                 </div>
-                <div>
-                    <h3 class="font-weight-bold">Tiện nghi chỗ ở</h3>
-                    <div>
-                        <p>
-                            Giới thiệu về các tiện nghi và dịch vụ tại nơi lưu trú
-                        </p>
-                    </div>
-                    <div class="title_service">
-                        <h5>Tiện ích</h5>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="title_service">
-                        <h5>Tiện ích bếp</h5>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-
-                            </div>
-                            <div class="col-sm-4">
-                                <p>
-                                    <i class="material-icons text-gray">apartment</i>
-                                    Căn hộ dịch vụ · 35 m2
-                                </p>
-                            </div>
-
-                        </div>
-                        <div class="title_service">
-                            <h5>Tiện ích phòng</h5>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <p>
-                                        <i class="material-icons text-gray">apartment</i>
-                                        Căn hộ dịch vụ · 35 m2
-                                    </p>
-
-                                </div>
-                                <div class="col-sm-4">
-                                    <p>
-                                        <i class="material-icons text-gray">apartment</i>
-                                        Căn hộ dịch vụ · 35 m2
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="rate">
                     <h3 class="font-weight-bold">Đánh giá</h3>
                     <div class="card-rate">
@@ -328,12 +199,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 " style="z-index: 10;">
+            <div class="col-sm-4 " style="z-index: 5;">
                 <div style="margin-top: 10px;position: sticky; top: 90px">
                     <div class="card">
                         <div class="card-body">
                             <div class="text-center">
-                                <h2 class="card-title">900,000₫ <span class="font-weight-light text-secondary"
+                                <h2 class="card-title">{{post["price"]}}<span class="font-weight-light text-secondary"
                                         style="font-size: 25px;">/đêm</span></h2>
                             </div>
                             <div>
@@ -353,37 +224,160 @@
                                 </div>
                                 <input type="text" class="form-control text-light" placeholder="Bạn muốn đi đâu?">
                                 <div class="w-100 text-center pt-3">
-                                    <button class="btn btn-primary btn-round    ">
+                                    <button class="btn btn-primary btn-round" data-toggle="modal"
+                                        data-target="#exampleModal">
                                         <i class="material-icons">favorite</i> Đặt ngay
                                         <div class="ripple-container"></div></button>
                                 </div>
-
                             </div>
-
-
-                            <script>
-                                $(function () {
-                                    $('.datetimepicker').datetimepicker({
-                                        format: 'DD/MM/YYYY',
-                                        icons: {
-                                            time: "fa fa-clock-o",
-                                            date: "fa fa-calendar",
-                                            up: "fa fa-chevron-up",
-                                            down: "fa fa-chevron-down",
-                                            previous: 'fa fa-chevron-left',
-                                            next: 'fa fa-chevron-right',
-                                            today: 'fa fa-screenshot',
-                                            clear: 'fa fa-trash',
-                                            close: 'fa fa-remove'
-                                        }
-                                    });
-                                });
-                            </script>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Modal thanh toan -->
+        <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title font-weight-bold" id="exampleModalLabel">Hoá đơn
+                        thanh toán</h2>
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="font-weight-bold text-center">Thông tin đặt chỗ</h3>
+                            <p>1 Khách</p>
+                            <p class="font-weight-bold">1 đêm tại AimeeHomestay#2 - Phan Bội Châu/ Self check-in</p>
+                            <div class="row">
+                                <div class="col-sm-6 ">
+                                    <label class="text-success"> Ngày nhận phòng</label>
+                                    <p>20/12/2000</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="text-danger"> Ngày trả phòng</label>
+                                    <p>20/12/2000</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-weight-bold"> Trách nhiệm vật chất</h4>
+                                <p>Khách hàng chịu mọi trách nhiệm thiệt hại về tài sản đã
+                                    gây ra tại chỗ ở trong thời gian lưu trú.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="font-weight-bold"> Nội quy chỗ ở</h4>
+                                <p>Hạn chế làm ồn sau 10 giờ tối <br /> Không đi giày/dép
+                                    trong nhà <br /> Không hút thuốc ở khu vực chung</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h3 class="font-weight-bold text-center">Thông tin của bạn</h3>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tên khách hàng</label>
+                                <input type="text" class="form-control"
+                                    id="exampleInputEmail1">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Số điện
+                                            thoại</label>
+                                        <input type="text" class="form-control"
+                                            id="exampleInputEmail1">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email
+                                            address</label>
+                                        <input type="email" class="form-control"
+                                            id="exampleInputEmail1"
+                                            aria-describedby="emailHelp">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mã khuyến mãi</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 text-center mb-3">
+                    <h4>Lựa chọn phương thức thanh toán</h4>
+                </div>
+                <div class="row d-flex justify-content-around">
+                    <div class=" col-sm-2 img-bill">
+                        <a href="">
+                            <img src="https://cdn.luxstay.com/images/logos/payments/napas.svg"
+                                alt="">
+                        </a>
+
+                    </div>
+                    <div class="col-sm-3 img-bill">
+                        <a href="">
+                            <img src="https://cdn.luxstay.com/images/logos/payments/visa_master_jcb.svg"
+                                alt="">
+                        </a>
+
+                    </div>
+                    <div class="col-sm-3 img-bill">
+                        <a href="">
+                            <img src="https://cdn.luxstay.com/images/logos/payments/acb_vcb.svg"
+                                alt="">
+                        </a>
+
+                    </div>
+                    <div class="col-sm-2 img-bill">
+                        <a href="">
+                            <img src="https://cdn.luxstay.com/images/logos/payments/momo.png"
+                                alt="">
+                        </a>
+
+                    </div>
+                    <div class="col-sm-2 img-bill">
+                        <a href="">
+                            <img src="https://cdn.luxstay.com/images/logos/payments/alepay.png"
+                                alt="">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="mt-5 mb-5 text-center">
+                    <button type="button" class="btn btn-primary">Thanh toán ngay</button>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal thanh toan -->
+        <script>
+            $(function () {
+                $('.datetimepicker').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-chevron-up",
+                        down: "fa fa-chevron-down",
+                        previous: 'fa fa-chevron-left',
+                        next: 'fa fa-chevron-right',
+                        today: 'fa fa-screenshot',
+                        clear: 'fa fa-trash',
+                        close: 'fa fa-remove'
+                    }
+                });
+            });
+        </script>
         <div class="same">
             <div>
                 <h3>Chỗ ở tương tự</h3>
@@ -479,14 +473,14 @@
     <script>
         jQuery.noConflict();
         (function ($) {
-            $(document).ready(function () {
+            setTimeout(function () {
                 $('.owl2').owlCarousel({
                     margin: 10,
                     nav: true,
                     loop: true,
                     autoWidth: true,
-                })
-            });
+                });
+            }, 2000);
         })(jQuery);
 
     </script>

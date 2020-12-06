@@ -55,9 +55,13 @@ body{
 }
 .owl-prev:hover{
     color: black!important;
+    background-color:white!important;
+    opacity: 0.5;
 }
 .owl-next:hover{
     color: black!important;
+    background-color:white!important;
+    opacity: 0.5;
 }
 .owl-dots{
     display: none;
@@ -156,7 +160,7 @@ background-color: white;
     font-size: 15px;
     color: black;
 }
-.img-header{
+/* .img-header{
     position: relative;
     z-index: -1;
     width: 100%;
@@ -164,6 +168,9 @@ background-color: white;
 }
 .img-header img{
     width: 100%;
+} */
+.modal-backdrop {
+    z-index: 1!important;
 }
 .navbar.navbar-transparent .text-header{
     color: white!important;
@@ -173,4 +180,42 @@ background-color: white;
 }
 .text-header{
     color: black!important;
+}
+
+
+.modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+   
+}
+
+  .modal-dialog .modal-header {
+    padding-top: 0;
+}
+.modal-header{
+    padding: 1rem!important;
+}
+.modal-title{
+ margin-top: 0;
+}
+
+.modal-dialog .modal-body {
+    padding-top: 0;
+}
+.modal-body h3{
+    margin: 0;
+}
+/* .modal-content{
+    background-color: #F4F4F4;
+} */
+
+.img-bill img{
+    max-width: 150px;
+   margin: auto;
+}
+.img-bill{
+    text-align: center;
+}
+.modal-body p{
+    font-size: 15px;
 }
