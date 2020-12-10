@@ -375,6 +375,12 @@
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Thống kê năm</label>
+                        <select class="form-control" id="exampleFormControlSelect1" ng-load="load()" ng-model="selectedItem" ng-options="item for item in listyear" ng-change="getdetail(item)">
+                          <!-- <option ng-repeat = "item in listyear" value="{{item}}">{{item}}</option> -->
+                        </select>
+                      </div>
 
                     <!-- Content Row -->
                     <div class="row">
