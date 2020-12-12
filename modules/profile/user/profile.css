@@ -150,3 +150,42 @@ margin-bottom: 0;
 .inputedit{
     border-bottom: 1px solid #9c27b0;
 }
+.editimage{
+    position: absolute;
+    top:55px;
+    left: 0px;
+    right: 0px;
+    margin: 0px auto;
+    background-color: white;
+    opacity: 0;
+    height: 40px;
+}
+.editimage:hover{
+    background-color: white;
+    opacity: 0.5;
+    transition: 0.5s;
+    color: black!important;
+}
+.avatar{
+    position: relative;
+}
+#exampleFormControlFile1{
+    display:none ;
+}
+#save{
+    color: #9c27b0;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin: 0px auto;
+    top:80px;
+    cursor: pointer;
+    box-sizing: unset;
+}
+#save:hover{
+   font-size: 20px;
+}
+#blah{
+    width: 160px;
+    height: 160px;
+}
