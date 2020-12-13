@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>Hoá đơn - Tables</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,13 +19,17 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <script src="/js/angular.min.js"></script>
+    <script src="js/bills.js"></script>
+    
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+   
+
 </head>
 
-<body id="page-top" ng-app="WebApp" ng-controller = "cardCtrl">
+<body id="page-top" ng-app="WebApp" ng-controller = "billsCtrl">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -369,50 +373,55 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Bảng quản lý bài viết</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Bảng quản lý hoá đơn</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 ">
-                            <select class="form-control form-control-lg col-md-4">
-                                <option>Bài viết đã duyệt</option>
-                                <option>Bài viết chờ duyệt</option>
-                            </select>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Tên bài đăng</th>                                          
-                                            <th>Sđt</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Giá</th>
-                                            <th>Người đăng bài</th>
+                                            <th>outputDate</th>                                          
+                                            <th>payDate</th>
+                                            <th>startDate</th>
+                                            <th>endDate</th>
+                                            <th>IDPost</th>
+                                            <th>Service</th>
+                                            <th>Total Cash</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Tên bài đăng</th>                                          
-                                            <th>Sđt</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Giá</th>
-                                            <th>Người đăng bài</th>
+                                            <th>outputDate</th>                                          
+                                            <th>payDate</th>
+                                            <th>startDate</th>
+                                            <th>endDate</th>
+                                            <th>IDPost</th>
+                                            <th>Service</th>
+                                            <th>Total Cash</th>
+                                            <th>Status</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                        <tr ng-repeat = "item in listAll track by $index">
+                                            <th>{{item.idBill}}</th>
+                                            <th>{{item.outputDate}}</th>                                          
+                                            <th>{{item.payDate}}</th>
+                                            <th>{{item.startDate}}</th>
+                                            <th>{{item.endDate}}</th>
+                                            <th>{{item.post.idPost}}</th>
+                                            <th >
+                                                <p ng-repeat = "key in item.services" href=""> {{key.nameService}}</p>
+                                            </th>
+                                            <th>{{item.totalCash}}</th>
+                                            <th>{{item.status}}</th>
                                         </tr>                                       
                                     </tbody>
                                 </table>

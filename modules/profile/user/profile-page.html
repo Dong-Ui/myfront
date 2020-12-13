@@ -101,7 +101,12 @@
                   </span>
                   
                 </label>
-                <a ng-show="soh" id="save" class="mt-2">Lưu</a>
+                <div ng-show="soh" class="row d-flex justify-content-center" id="save">
+                  <a  class=" text-success mt-2 btn btn btn-primary btn-round">Lưu</a>
+                  <span class="d-flex align-items-center text-dark"> or </span>
+                  <a  class="text-danger mt-2 btn btn btn-primary btn-round">huỷ</a>
+                </div>
+                
                 <input type="file" class="form-control-file" id="exampleFormControlFile1">
                 
               </div>

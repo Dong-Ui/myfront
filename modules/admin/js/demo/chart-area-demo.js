@@ -8,6 +8,12 @@ app.controller("adminCtrl", function ($scope, $http) {
   $scope.listyear = [];
   $scope.listrecover = [];
   $scope.listdetail = [];
+  $scope.services = [];
+  $scope.priceservice = 0;
+  $scope.mot = 0;
+  $scope.hai = 0;
+  $scope.ba = 0;
+  $scope.chartpie = [];
   $http({
     method: "GET",
     url: "http://localhost:8080/bill/thongkedoanhthu",
@@ -21,16 +27,15 @@ app.controller("adminCtrl", function ($scope, $http) {
   var i
   var u
   $scope.getyear = function () {
-    i = $scope.listAll[0]["finishDate"].toString().indexOf("-");
-    u = $scope.listAll[0]["finishDate"].toString().lastIndexOf("-");
-    // console.log($scope.listAll[0]["finishDate"].toString().substring(u+1,$scope.listAll[0]["finishDate"].toString().length))
+    i = $scope.listAll[0]["payDate"].toString().indexOf("-");
+    u = $scope.listAll[0]["payDate"].toString().lastIndexOf("-");
     for (let index = 0; index < $scope.listAll.length; index++) {
       if (index != 0) {
-        if ($scope.listyear.toString().search($scope.listAll[index]["finishDate"].toString().substring(0, i)) == (-1)) {
-          $scope.listyear.push($scope.listAll[index]["finishDate"].toString().substring(0, i));
+        if ($scope.listyear.toString().search($scope.listAll[index]["payDate"].toString().substring(0, i)) == (-1)) {
+          $scope.listyear.push($scope.listAll[index]["payDate"].toString().substring(0, i));
         }
       } else {
-        $scope.listyear.push($scope.listAll[index]["finishDate"].toString().substring(0, i));
+        $scope.listyear.push($scope.listAll[index]["payDate"].toString().substring(0, i));
       }
     }
     $scope.selectedItem = $scope.listyear[0];
@@ -39,6 +44,7 @@ app.controller("adminCtrl", function ($scope, $http) {
 
 
   $scope.getdetail = function () {
+    $scope.listrecover.splice(0, $scope.listrecover.length);
     $scope.listdetail.splice(0, 12);
     $scope.listmounth.splice(0, 12);
     var x = document.getElementById("exampleFormControlSelect1").value;
@@ -46,30 +52,48 @@ app.controller("adminCtrl", function ($scope, $http) {
     if (year == "?") {
       year = $scope.listyear[0];
     }
+    $scope.select = year;
     $scope.listmounth.length = 12;
     $scope.listrecover = $scope.listAll;
+    // $scope.listAll.forEach(element => {
+    //   $scope.listrecover.push(element)
+    //   console.log(element)
+    // });
     for (let index = 0; index < $scope.listrecover.length; index++) {
-      if ($scope.listrecover[index]["finishDate"].toString().substring(0, i) == year) {
-        $scope.name = $scope.listrecover[index]["finishDate"].toString().substring(u + 1, $scope.listrecover[index]["finishDate"].toString().length);
-        $scope.name = $scope.name.replace(0, "")
-        if ($scope.listmounth[$scope.name] != undefined) {
+      if ($scope.listrecover[index]["payDate"].toString().substring(0, i) == year) {
+        $scope.services.push($scope.listrecover[index]["services"]);
+        $scope.name = $scope.listrecover[index]["payDate"].toString().substring(i + 1, u);
+        if ($scope.name.search("0") == 0) {
+          $scope.name = $scope.name.replace(0, "")
+        }
+        $scope.hai = $scope.hai + 1;
+        if ($scope.listmounth[$scope.name] == undefined) {
+          $scope.listmounth[$scope.name] = $scope.listrecover[index];
+        } else {
           $scope.tong = $scope.listmounth[$scope.name]["totalCash"] + $scope.listrecover[index]["totalCash"]
           $scope.listmounth[$scope.name]["totalCash"] = $scope.tong
           $scope.listrecover.splice(index, 1);
-        } else {
-          $scope.listmounth[$scope.name] = $scope.listrecover[index];
+          console.log("list else: " + $scope.listmounth.length)
         }
       }
+      console.log("list: " + $scope.listmounth.length)
     }
-    console.log($scope.listmounth)
-    for (let index = 1; index < $scope.listmounth.length + 1; index++) {
+    for (let index = 1; index < $scope.listmounth.length; index++) {
       if ($scope.listmounth[index] == undefined) {
         $scope.listdetail.push(0);
       } else {
         $scope.listdetail.push($scope.listmounth[index]["totalCash"]);
+        $scope.mot = $scope.mot + $scope.listmounth[index]["totalCash"];
       }
     }
-    console.log($scope.listdetail);
+    console.log($scope.services)
+    $scope.services.forEach(element => {
+      element.forEach(element2 => {
+        $scope.priceservice = $scope.priceservice + element2["price"];
+      });
+    });
+    $scope.chartpie = [((($scope.mot - $scope.priceservice) / $scope.mot) * 100).toFixed(2),(($scope.priceservice / $scope.mot) * 100).toFixed(2)]
+    $scope.pie();
     $scope.loadera()
     // setTimeout(function () {
     //   $('.chart-area').fadeOut('slow', function () {
@@ -80,6 +104,45 @@ app.controller("adminCtrl", function ($scope, $http) {
     // }, 3000);
 
   }
+
+  $scope.pie = function () {
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
+
+    // Pie Chart Example
+    var ctx = document.getElementById("myPieChart");
+    var myPieChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ["Doanh thu của Phòng", "Doanh thu của Dịch vụ"],
+        datasets: [{
+          data: $scope.chartpie,
+          backgroundColor: ['#4e73df', '#1cc88a'],
+          hoverBackgroundColor: ['#2e59d9', '#17a673'],
+          hoverBorderColor: "rgba(234, 236, 244, 1)",
+        }],
+      },
+      options: {
+        maintainAspectRatio: false,
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          caretPadding: 10,
+        },
+        legend: {
+          display: false
+        },
+        cutoutPercentage: 80,
+      },
+    });
+  }
+
   $scope.loadera = function () {
     var myLineChart = new Chart(ctx, {
       type: 'line',
