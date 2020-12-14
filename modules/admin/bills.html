@@ -372,6 +372,8 @@
                                             <th>IDPost</th>
                                             <th>Service</th>
                                             <th>Total Cash</th>
+                                            <th>Vouchers</th>
+                                            <th>Khách hàng</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -385,6 +387,8 @@
                                             <th>IDPost</th>
                                             <th>Service</th>
                                             <th>Total Cash</th>
+                                            <th>Vouchers</th>
+                                            <th>Khách hàng</th>
                                             <th>Status</th>
                                         </tr>
                                     </tfoot>
@@ -400,6 +404,8 @@
                                                 <p ng-repeat = "key in item.services" href=""> {{key.nameService}}</p>
                                             </th>
                                             <th>{{item.totalCash}}</th>
+                                            <th>{{item.vouchers.content}}</th>
+                                            <th>{{item.customers.fullName}}</th>
                                             <th>{{item.status}}</th>
                                         </tr>                                       
                                     </tbody>

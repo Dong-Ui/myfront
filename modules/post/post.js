@@ -73,81 +73,107 @@ app.controller("postCtrl", function ($scope, $http) {
         });
     }
     $scope.loaduser()
-
     $scope.opentab = function () {
-        $scope.bill.startDate = document.getElementById("start").value;
-        $scope.bill.endDate = document.getElementById("end").value;
-        // var d1;
-        // var d2;
-        // var t = new Date();
-        // var month = t.getMonth();
-        // var day = t.getDay();
-        // var date = t.getDate();
-        // var year = t.getFullYear();
-        // var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        // var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        // var today = "0" + (month + 1) + "/" + date + "/" + year;
-        // var dateStr = days[day] + ', ' + months[month] + ' ' + date + ', ' + year;
-        // document.getElementById("alternate1").value = dateStr;
+        var d = document.getElementById("start").value;
+        var d1Parts = d.split("/");
+        var d1 = new Date(+d1Parts[2], d1Parts[1] - 1, +d1Parts[0]);
 
-
+        var dateString = document.getElementById("end").value;
+        var dateParts = dateString.split("/");
+        var d2 = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+        $scope.bill.startDate = d1;
+        $scope.bill.endDate = d2;
+        // console.log("Ngày bắt đầu: " + d1)
+        // console.log("Ngày kết thúc: " + d2)
+        console.log("Ngày chênh lệch: ", parseInt((d2 - d1) / (24 * 3600 * 1000)))
+        var u = parseInt((d2 - d1) / (24 * 3600 * 1000))
+        var y = parseInt($scope.post.price.substring(0, $scope.post.price.length - 1).replace(",", ""))
+        $scope.tong = u*y;
+        $scope.bill.vouchers = "";
+        document.getElementById("exampleInputvoucher").value = "";
+            $scope.bill.totalCash = formatMoney($scope.tong);
+        
+        console.log($scope.bill.totalCash)
+        $scope.getbill();
+        $scope.findpost();
     }
 
-    // $(function () {
-    //     var d1;
-    //     var d2;
+    $scope.listbill = [];
+    $scope.getbill = function () {
+        $http({
+            method: "GET",
+            url: "http://localhost:8080/bill/thongkedoanhthu",
+        }).then(function (response) {
+            $scope.listbill = response.data;
+            $scope.bill["idBill"] = Number($scope.listbill[$scope.listbill.length - 1]["idBill"]) + 1;
+        }, function (error) {
+            console.log(error);
+        })
+    }
 
-    //     var t = new Date();
-    //     var month = t.getMonth();
-    //     var day = t.getDay();
-    //     var date = t.getDate();
-    //     var year = t.getFullYear();
-    //     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    //     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    //     var today = "0" + (month + 1) + "/" + date + "/" + year;
-    //     var dateStr = days[day] + ', ' + months[month] + ' ' + date + ', ' + year;
-    //     document.getElementById("alternate1").value = dateStr;
-    //     document.getElementById("datepicker1").setAttribute("value", today);
-    //     var bb = today.split(' ');
-    //     d1 = new Date(bb);
+    const input = document.querySelector('#exampleInputvoucher');
+    input.addEventListener('input', updateValue);
+    $scope.listvoucher = [];
+    function updateValue(e) {
+        console.log(e.target.value)
+        $http({
+            method: "GET",
+            url: "http://localhost:8080/vouchers",
+        }).then(function (response) {
+            $scope.listvoucher = response.data;
+            $scope.listvoucher.forEach(element => {
+                element.discount = Number(element.discount.replace("%", ""));
+            });
+            $scope.listvoucher.forEach(element => {
+                if(element._idVoucher == document.getElementById("exampleInputvoucher").value){
+                    $scope.bill.totalCash =  formatMoney(($scope.tong / 100) * (100-element.discount));
+                    $scope.bill.vouchers = element;
+                }             
+            });
+        }, function (error) {
+            console.log(error);
+        })
+    }
 
+    $scope.postfind = {}
+    $scope.findpost = function(){
+        $http({
+            method: "GET",
+            url: "http://localhost:8080/posts/find/" + idPost,
+        }).then(function (response) {
+            $scope.postfind = response.data
+        }, function (error) {
+            console.log(error);
+        })
+    }
 
-    //     $("#datepicker1").datepicker({
-    //         showOtherMonths: true,
-    //         selectOtherMonths: true,
-    //         changeMonth: true,
-    //         changeYear: true,
-    //         altField: "#alternate1",
-    //         altFormat: "DD, MM d, yy",
+    $scope.submit = function () {
+        $scope.bill.customers = $scope.user;
+        $scope.bill.post = $scope.postfind;
+        $scope.bill.status = true;
+        var daybill = new Date();
+        $scope.bill.outputDate = daybill;
+        $scope.bill.payDate = daybill;
+        console.log($scope.bill)
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8080/bills/new',
+            data: JSON.stringify($scope.bill)
+        }).then(function (response) {
+            alert("Bạn đã đặt phòng thành công\nVui lòng check mail để nhận kiểm tra chi tiết!")
+            console.log(response)
+        }, function (error) {
+            console.log(error);
+        });
+    }
+    function formatMoney(n, c, t) {
+        var c = isNaN(c = Math.abs(c)) ? 2 : c,
+            t = t == undefined ? "." : t,
+            s = n < 0 ? "-" : "",
+            i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+            j = (j = i.length) > 3 ? j % 3 : 0;
 
-    //         onSelect: function () {
-    //             var a = $.datepicker.formatDate("yy mm dd", $(this).datepicker("getDate"));
-    //             var b = a.split(' ');
-    //             d1 = new Date(b);
-    //         }
-    //     });
-
-    //     $("#datepicker2").datepicker({
-    //         showOtherMonths: true,
-    //         selectOtherMonths: true,
-    //         changeMonth: true,
-    //         changeYear: true,
-    //         altField: "#alternate2",
-    //         altFormat: "DD, MM d, yy",
-
-    //         onSelect: function () {
-    //             var c = $.datepicker.formatDate("yy mm dd", $(this).datepicker("getDate"));
-    //             var g = c.split(' ');
-    //             d2 = new Date(g);
-    //         }
-    //     });
-
-    //     $("#click").on('click', function () {
-    //         var oneDay = 24 * 60 * 60 * 1000;	// hours*minutes*seconds*milliseconds
-    //         var diffDays = (d2 - d1) / oneDay;
-    //         document.getElementById("output").innerHTML = diffDays + " days";
-    //     });
-
-    // });
+        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t);
+    };
 })
 

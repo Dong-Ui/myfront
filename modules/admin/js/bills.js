@@ -12,6 +12,7 @@ app.controller("billsCtrl", function ($scope, $http) {
     }).then(function (response) {
         $scope.listAll = response.data;
         console.log($scope.listAll)
+        console.log($scope.listAll[0])
     }, function (error) {
         console.log(error);
     })

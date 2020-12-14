@@ -84,6 +84,7 @@ app.controller("profileCtrl", function ($scope, Upload, $http, $timeout) {
             url: "http://localhost:8080/customers/load?userName=" + $scope.username_cus,
         }).then(function (response) {
             $scope.customer = response.data[0];
+            $scope.loadbill();      
             if ($scope.customer.gender) {
                 $scope.gender = "Nam";
             } else {
@@ -290,6 +291,41 @@ app.controller("profileCtrl", function ($scope, Upload, $http, $timeout) {
         } else {
             $scope.checkSaveBtn = false;
         }
+    }
+
+    $scope.listbill = [];
+    $scope.listpost = [];
+    $scope.listpostdetail = [];
+    $scope.loadbill = function(){
+        $http({
+            method: "GET",
+            url: "http://localhost:8080/bill/getbills/" + $scope.customer._idCustomer,
+        }).then(function (response) {
+            $scope.listbill = response.data;
+            $scope.listbill.forEach(element => {
+                $scope.listpost.push(element.post)
+                console.log(element.post.idPost)
+            });
+            $scope.listpost.forEach(element =>{
+                $http({
+                    method: "GET",
+                    url: "http://localhost:8080/posts/detail?idPost=" + element.idPost,
+                }).then(function (response) {
+                    $scope.listpostdetail.push(response.data[0]);
+                    if(response.data[0] != undefined){
+                        for (let index = 0; index < $scope.listbill.length; index++) {
+                            $scope.listbill[index].post = $scope.listpostdetail[index];
+                        }
+                    }
+                   
+                }, function (error) {
+                    console.log(error);
+                })
+                console.log($scope.listbill)
+            });
+        }, function (error) {
+            console.log(error);
+        })
     }
 })
 

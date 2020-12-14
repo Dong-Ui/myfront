@@ -56,11 +56,11 @@
                             <input type="text" class="form-control text-header" placeholder="Bạn muốn đi đâu?">
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-2">
                         <button class="btn btn-primary">Tìm kiếm</button>
                     </div>
-                    
+
                     <ul class="navbar-nav ml-auto" ng-show="check_nav_user">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
@@ -72,7 +72,7 @@
                             </div>
                         </li>
                     </ul>
-    
+
                     <ul class="navbar-nav ml-auto" ng-hide="check_nav_user">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
@@ -98,7 +98,7 @@
                     <img src="{{item}}" alt="">
                 </a>
             </div>
-           
+
         </div>
     </div>
     <div class="container">
@@ -227,7 +227,8 @@
                                     <button ng-click="opentab()" class="btn btn-primary btn-round" data-toggle="modal"
                                         data-target="#exampleModal">
                                         <i class="material-icons">favorite</i> Đặt ngay
-                                        <div class="ripple-container"></div></button>
+                                        <div class="ripple-container"></div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -236,144 +237,144 @@
             </div>
         </div>
         <!-- Modal thanh toan -->
-        <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog d-flex align-items-center" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title font-weight-bold" id="exampleModalLabel">Hoá đơn
-                        thanh toán</h2>
-                    <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="font-weight-bold text-center">Thông tin đặt chỗ</h3>
-                            <p>1 Khách</p>
-                            <p class="font-weight-bold">1 đêm tại AimeeHomestay#2 - Phan Bội Châu/ Self check-in</p>
-                            <form action="">
-                                <div class="row">
-                                    <div class="col-sm-6 ">
-                                        <label class="text-success"> Ngày nhận phòng</label>
-                                        <p>{{bill.startDate}}</p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="text-danger"> Ngày trả phòng</label>
-                                        <p>{{bill.endDate}}</p>
-                                    </div>
-                                </div>
-                            </form>
-                            
-                            <div>
-                                <h4 class="font-weight-bold"> Trách nhiệm vật chất</h4>
-                                <p>Khách hàng chịu mọi trách nhiệm thiệt hại về tài sản đã
-                                    gây ra tại chỗ ở trong thời gian lưu trú.
-                                </p>
-                            </div>
-                            <div>
-                                <h4 class="font-weight-bold"> Nội quy chỗ ở</h4>
-                                <p>Hạn chế làm ồn sau 10 giờ tối <br /> Không đi giày/dép
-                                    trong nhà <br /> Không hút thuốc ở khu vực chung</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <h3 class="font-weight-bold text-center">Thông tin của bạn</h3>
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="exampleInputName">Tên khách hàng</label>
-                                    <input ng-model="user.fullName" type="text" class="form-control"
-                                        id="exampleInputName">
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputphone">Số điện
-                                                thoại</label>
-                                            <input ng-model="user.phone" type="text" class="form-control"
-                                                id="exampleInputphone">
+        <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog d-flex align-items-center" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title font-weight-bold" id="exampleModalLabel">Hoá đơn
+                            thanh toán</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h3 class="font-weight-bold text-center">Thông tin đặt chỗ</h3>
+                                <p>1 Khách</p>
+                                <p class="font-weight-bold">1 đêm tại AimeeHomestay#2 - Phan Bội Châu/ Self check-in</p>
+                                <form action="">
+                                    <div class="row">
+                                        <div class="col-sm-6 ">
+                                            <label class="text-success"> Ngày nhận phòng</label>
+                                            <p>{{bill.startDate}}</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="text-danger"> Ngày trả phòng</label>
+                                            <p>{{bill.endDate}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email
-                                                address</label>
-                                            <input ng-model="user.email" type="email" class="form-control"
-                                                id="exampleInputEmail1"
-                                                aria-describedby="emailHelp">
+                                </form>
+
+                                <div>
+                                    <h4 class="font-weight-bold"> Trách nhiệm vật chất</h4>
+                                    <p>Khách hàng chịu mọi trách nhiệm thiệt hại về tài sản đã
+                                        gây ra tại chỗ ở trong thời gian lưu trú.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 class="font-weight-bold"> Nội quy chỗ ở</h4>
+                                    <p>Hạn chế làm ồn sau 10 giờ tối <br /> Không đi giày/dép
+                                        trong nhà <br /> Không hút thuốc ở khu vực chung</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h3 class="font-weight-bold text-center">Thông tin của bạn</h3>
+                                <form action="">
+                                    <div class="form-group">
+                                        <label for="exampleInputName">Tên khách hàng</label>
+                                        <input ng-model="user.fullName" type="text" class="form-control"
+                                            id="exampleInputName">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputphone">Số điện
+                                                    thoại</label>
+                                                <input ng-model="user.phone" type="text" class="form-control"
+                                                    id="exampleInputphone">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email
+                                                    address</label>
+                                                <input ng-model="user.email" type="email" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
+
                                     <div class="form-group">
-                                        <label for="exampleInputBank">Số tài khoản ngân hàng</label>
-                                        <input id="exampleInputBank" ng-model="user.bankNumber" type="text" class="form-control">
+                                        <label for="exampleInputvoucher">Mã khuyến mãi (nếu có)</label>
+                                        <input id="exampleInputvoucher" type="text"
+                                            class="form-control">
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputBank">Tổng tiền cần thanh toán</label>
-                                        <input id="exampleInputBank" ng-model="" type="text" class="form-control">
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputBank">Số tài khoản ngân hàng</label>
+                                                <input id="exampleInputBank" ng-model="user.bankNumber" type="text"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputtotal">Tổng tiền cần thanh toán</label>
+                                                <input id="exampleInputtotal" ng-model="bill.totalCash" type="text"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                            </form>              
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-sm-12 text-center mb-3">
-                    <h4>Lựa chọn phương thức thanh toán</h4>
-                </div>
-                <div class="row d-flex justify-content-around">
-                    <div class=" col-sm-2 img-bill">
-                        <a href="">
-                            <img src="https://cdn.luxstay.com/images/logos/payments/napas.svg"
-                                alt="">
-                        </a>
-
+                    <div class="col-sm-12 text-center mb-3">
+                        <h4>Lựa chọn phương thức thanh toán</h4>
                     </div>
-                    <div class="col-sm-3 img-bill">
-                        <a href="">
-                            <img src="https://cdn.luxstay.com/images/logos/payments/visa_master_jcb.svg"
-                                alt="">
-                        </a>
+                    <div class="row d-flex justify-content-around">
+                        <div class=" col-sm-2 img-bill">
+                            <a href="">
+                                <img src="https://cdn.luxstay.com/images/logos/payments/napas.svg" alt="">
+                            </a>
 
+                        </div>
+                        <div class="col-sm-3 img-bill">
+                            <a href="">
+                                <img src="https://cdn.luxstay.com/images/logos/payments/visa_master_jcb.svg" alt="">
+                            </a>
+
+                        </div>
+                        <div class="col-sm-3 img-bill">
+                            <a href="">
+                                <img src="https://cdn.luxstay.com/images/logos/payments/acb_vcb.svg" alt="">
+                            </a>
+
+                        </div>
+                        <div class="col-sm-2 img-bill">
+                            <a href="">
+                                <img src="https://cdn.luxstay.com/images/logos/payments/momo.png" alt="">
+                            </a>
+
+                        </div>
+                        <div class="col-sm-2 img-bill">
+                            <a href="">
+                                <img src="https://cdn.luxstay.com/images/logos/payments/alepay.png" alt="">
+                            </a>
+
+                        </div>
                     </div>
-                    <div class="col-sm-3 img-bill">
-                        <a href="">
-                            <img src="https://cdn.luxstay.com/images/logos/payments/acb_vcb.svg"
-                                alt="">
-                        </a>
-
-                    </div>
-                    <div class="col-sm-2 img-bill">
-                        <a href="">
-                            <img src="https://cdn.luxstay.com/images/logos/payments/momo.png"
-                                alt="">
-                        </a>
-
-                    </div>
-                    <div class="col-sm-2 img-bill">
-                        <a href="">
-                            <img src="https://cdn.luxstay.com/images/logos/payments/alepay.png"
-                                alt="">
-                        </a>
-
+                    <div class="mt-5 mb-5 text-center">
+                        <button ng-click="submit()" class="btn btn-primary">Thanh toán ngay</button>
                     </div>
                 </div>
-                <div class="mt-5 mb-5 text-center">
-                    <button type="button" class="btn btn-primary">Thanh toán ngay</button>
-                </div>
-
-
-
             </div>
         </div>
-    </div>
-    <!-- Modal thanh toan -->
+        <!-- Modal thanh toan -->
         <script>
             $(function () {
                 $('.datetimepicker').datetimepicker({
