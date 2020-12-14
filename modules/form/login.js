@@ -60,8 +60,9 @@ app.controller("loginCtrl", function ($scope, $http) {
 
   //Regist
   $scope.regist = function () {
+    var registDay = new Date()
     const model = new Model();
-    model.setModelRegist($scope.newUserName, $scope.newFullName, $scope.newPassWord, $scope.email)
+    model.setModelRegist($scope.newUserName, $scope.newFullName, $scope.newPassWord, $scope.email, registDay)
     if($scope.newPassWord == $scope.cnfPassWord){
       $http({
         method: "POST",

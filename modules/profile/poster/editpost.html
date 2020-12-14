@@ -18,22 +18,23 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="#"><img src="../../../img/logo.png" alt=""></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Chỉnh sửa bài viết<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Trang cá nhân</a>
-                </li>
-              </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Chỉnh sửa bài viết<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Trang cá nhân</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        
-      </nav>
+
+    </nav>
     <div class="container">
         <div class="form-edit">
             <form>
@@ -50,7 +51,7 @@
                                 <label for="inputEmail4">Diện tích phòng (m)</label>
                                 <input type="number" class="form-control" id="inputEmail4" placeholder="">
                             </div>
-                        </div>                     
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -115,14 +116,14 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                        <a onclick="show()" class="btn btn-primary">Lưu thay đổi</a>
                     </div>
                     <div class="form-group col-md-6">
                         <div class="form-group">
                             <label for="inputEmail4">Tải ảnh lên</label>
                             <input id="input-2" name="input2[]" type="file" class="file form-control" multiple
                                 data-show-upload="true" data-show-caption="true">
-                        </div>     
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -138,16 +139,25 @@
                                         class="form-control datetimepicker text-header" />
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <label for="inputEmail4">Thêm mô tả</label>
                         <textarea name="editor1" id="editor1" rows="10" cols="80">
                             Thêm mô tả của bạn vào đây
-                        </textarea>
+                        </textarea>                   
                         <script>
-                            CKEDITOR.replace('editor1');
-                        </script>             
+                            var editor = CKEDITOR.replace('editor1');
+                            editor.on('change', function (evt) {
+                                // getData() returns CKEditor's HTML content.
+                                console.log('Total bytes: ' + evt.editor.getData().length);
+                            });
+                            function show() {
+                                var data = CKEDITOR.instances.editor1.getData();
+                                console.log(data)
+                            }
+
+                        </script>
                     </div>
-                </div>                       
+                </div>
             </form>
         </div>
     </div>

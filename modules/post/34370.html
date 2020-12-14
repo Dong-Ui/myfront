@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Hello, world!</title>
+    <title>DREAM HOME</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, name=" viewport" />
@@ -33,7 +33,7 @@
         <nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100">
             <div class="container" style="max-width: 90%;">
                 <div class="navbar-translate">
-                    <a class="navbar-brand font-weight-bold" href="#">
+                    <a class="navbar-brand font-weight-bold" href="/modules/home/index.html">
                         <img src="/images/logo.png" alt=""></a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
@@ -56,30 +56,32 @@
                             <input type="text" class="form-control text-header" placeholder="Bạn muốn đi đâu?">
                         </div>
                     </div>
-                    <div class="col-sm-2">
-                        <div class="input-group ">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-header">
-                                    <i class="material-icons">calendar_today</i>
-                                </span>
-                            </div>
-                            <input type="text" placeholder="dd/mm/yyyy"
-                                class="form-control datetimepicker text-header" />
-                        </div>
-                    </div>
+                    
                     <div class="col-sm-2">
                         <button class="btn btn-primary">Tìm kiếm</button>
                     </div>
-                    <ul class="navbar-nav ml-auto">
+                    
+                    <ul class="navbar-nav ml-auto" ng-show="check_nav_user">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">person</i> Tài Khoản
+                                <i class="material-icons">person</i>Tài Khoản
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="javascript:;">Action</a>
-                                <a class="dropdown-item" href="javascript:;">Another action</a>
-                                <a class="dropdown-item" href="javascript:;">Something else here</a>
+                                <a style="cursor: pointer;" class="dropdown-item" href="{{urlLogin}}">Đăng Nhập</a>
+                            </div>
+                        </li>
+                    </ul>
+    
+                    <ul class="navbar-nav ml-auto" ng-hide="check_nav_user">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">person</i>Xin Chào {{username_cus}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="javascript:;">Thông Tin Tài Khoản</a>
+                                <a style="cursor: pointer;" class="dropdown-item" ng-click="logOut()">Đăng Xuất</a>
                             </div>
                         </li>
                     </ul>
@@ -126,7 +128,6 @@
                 </div>
                 <div id="summary">
                     <p class="collapse" id="collapseSummary">
-                        {{post["content"]}}
                     </p>
 
                     <a class="collapsed" data-toggle="collapse" href="#collapseSummary" aria-expanded="false"
@@ -210,7 +211,7 @@
                             <div>
                                 <div class="row">
                                     <div class="col-sm-5 form-group">
-                                        <input type="text" placeholder="dd/mm/yyyy"
+                                        <input id="start" type="text" placeholder="dd/mm/yyyy"
                                             class="form-control datetimepicker" />
                                     </div>
                                     <div class="col-sm-2 text-center d-flex align-items-center justify-content-center"
@@ -218,13 +219,12 @@
                                         đến
                                     </div>
                                     <div class="col-sm-5 form-group">
-                                        <input type="text" placeholder="dd/mm/yyyy"
+                                        <input id="end" type="text" placeholder="dd/mm/yyyy"
                                             class="form-control datetimepicker" />
                                     </div>
                                 </div>
-                                <input type="text" class="form-control text-light" placeholder="Bạn muốn đi đâu?">
                                 <div class="w-100 text-center pt-3">
-                                    <button class="btn btn-primary btn-round" data-toggle="modal"
+                                    <button ng-click="opentab()" class="btn btn-primary btn-round" data-toggle="modal"
                                         data-target="#exampleModal">
                                         <i class="material-icons">favorite</i> Đặt ngay
                                         <div class="ripple-container"></div></button>
@@ -254,16 +254,19 @@
                             <h3 class="font-weight-bold text-center">Thông tin đặt chỗ</h3>
                             <p>1 Khách</p>
                             <p class="font-weight-bold">1 đêm tại AimeeHomestay#2 - Phan Bội Châu/ Self check-in</p>
-                            <div class="row">
-                                <div class="col-sm-6 ">
-                                    <label class="text-success"> Ngày nhận phòng</label>
-                                    <p>20/12/2000</p>
+                            <form action="">
+                                <div class="row">
+                                    <div class="col-sm-6 ">
+                                        <label class="text-success"> Ngày nhận phòng</label>
+                                        <p>{{bill.startDate}}</p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="text-danger"> Ngày trả phòng</label>
+                                        <p>{{bill.endDate}}</p>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <label class="text-danger"> Ngày trả phòng</label>
-                                    <p>20/12/2000</p>
-                                </div>
-                            </div>
+                            </form>
+                            
                             <div>
                                 <h4 class="font-weight-bold"> Trách nhiệm vật chất</h4>
                                 <p>Khách hàng chịu mọi trách nhiệm thiệt hại về tài sản đã
@@ -278,34 +281,45 @@
                         </div>
                         <div class="col-sm-6">
                             <h3 class="font-weight-bold text-center">Thông tin của bạn</h3>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tên khách hàng</label>
-                                <input type="text" class="form-control"
-                                    id="exampleInputEmail1">
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Số điện
-                                            thoại</label>
-                                        <input type="text" class="form-control"
-                                            id="exampleInputEmail1">
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="exampleInputName">Tên khách hàng</label>
+                                    <input ng-model="user.fullName" type="text" class="form-control"
+                                        id="exampleInputName">
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputphone">Số điện
+                                                thoại</label>
+                                            <input ng-model="user.phone" type="text" class="form-control"
+                                                id="exampleInputphone">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email
+                                                address</label>
+                                            <input ng-model="user.email" type="email" class="form-control"
+                                                id="exampleInputEmail1"
+                                                aria-describedby="emailHelp">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email
-                                            address</label>
-                                        <input type="email" class="form-control"
-                                            id="exampleInputEmail1"
-                                            aria-describedby="emailHelp">
+                                        <label for="exampleInputBank">Số tài khoản ngân hàng</label>
+                                        <input id="exampleInputBank" ng-model="user.bankNumber" type="text" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Mã khuyến mãi</label>
-                                <input type="text" class="form-control">
-                            </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputBank">Tổng tiền cần thanh toán</label>
+                                        <input id="exampleInputBank" ng-model="" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                
+                            </form>              
                         </div>
                     </div>
                 </div>
