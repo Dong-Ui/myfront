@@ -14,6 +14,28 @@ app.controller("adminCtrl", function ($scope, $http) {
   $scope.hai = 0;
   $scope.ba = 0;
   $scope.chartpie = [];
+
+
+  //Get Cookies
+  $scope.getCookie = function (cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+  //Get Admin
+  $scope.admin = $scope.getCookie("ADMIN");
+
+
   $http({
     method: "GET",
     url: "http://localhost:8080/bill/thongkedoanhthu",
@@ -92,7 +114,7 @@ app.controller("adminCtrl", function ($scope, $http) {
         $scope.priceservice = $scope.priceservice + element2["price"];
       });
     });
-    $scope.chartpie = [((($scope.mot - $scope.priceservice) / $scope.mot) * 100).toFixed(2),(($scope.priceservice / $scope.mot) * 100).toFixed(2)]
+    $scope.chartpie = [((($scope.mot - $scope.priceservice) / $scope.mot) * 100).toFixed(2), (($scope.priceservice / $scope.mot) * 100).toFixed(2)]
     $scope.pie();
     $scope.loadera()
     // setTimeout(function () {

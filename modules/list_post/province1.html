@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Hello, world!</title>
+    <title>DREAM HOME</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, name=" viewport" />
@@ -33,8 +33,8 @@
         <nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100">
             <div class="container" style="max-width: 90%;">
                 <div class="navbar-translate">
-                    <a class="navbar-brand font-weight-bold" href="#">
-                        <img src="../../img/logo.png" alt=""></a>
+                    <a class="navbar-brand font-weight-bold" href="/modules/home/index.html">
+                        <img src="../../images/logo.png" alt=""></a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -69,16 +69,27 @@
                     <div class="col-sm-2">
                         <button class="btn btn-primary">Tìm kiếm</button>
                     </div>
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" ng-show="check_nav_user">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">person</i> Tài Khoản
+                                <i class="material-icons">person</i>Tài Khoản
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="javascript:;">Action</a>
-                                <a class="dropdown-item" href="javascript:;">Another action</a>
-                                <a class="dropdown-item" href="javascript:;">Something else here</a>
+                                <a style="cursor: pointer;" class="dropdown-item" href="{{urlLogin}}">Đăng Nhập</a>
+                            </div>
+                        </li>
+                    </ul>
+    
+                    <ul class="navbar-nav ml-auto" ng-hide="check_nav_user">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">person</i>Xin Chào {{username_cus}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="javascript:;">Thông Tin Tài Khoản</a>
+                                <a style="cursor: pointer;" class="dropdown-item" ng-click="logOut()">Đăng Xuất</a>
                             </div>
                         </li>
                     </ul>
@@ -86,6 +97,7 @@
             </div>
         </nav>
     </div>
+
     <div class="container slide">
         <div class="owl-carousel owl2 owl-theme">
             <div class="item position-relative" style="width: 100%!important;">
@@ -163,9 +175,10 @@
             </div>
         </div>
     </div>
+
     <div class="container listpost pt-4">
         <div>
-            <h3 class="font-weight-bold">{{posts.length}} Homestay tại {{posts["0"]["province"]}}</h3>
+            <h3 class="font-weight-bold">{{totalPosts}} Homestay tại {{posts["0"]["province"]}}</h3>
         </div>
 
         <div class="row list-box" style="margin-left: 100px;">
@@ -183,21 +196,21 @@
                 </div>
             </div>
         </div>
+
         <div class="d-flex justify-content-center mt-4">
             <nav aria-label="...">
                 <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    <li class="page-item" ng-show="checkBack" ng-click="btnBack()">
+                        <a class="page-link" tabindex="-1">Previous</a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
-                    <li class="page-item ">
-                        <a class="page-link" href="#">2</a>
+                    <li class="page-item active" id="0" ng-click="changeActive(0)">
+                        <a class="page-link">1</a>
                     </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
+                    <li class="page-item" ng-repeat="item in listPage" id="{{item}}" ng-click="changeActive(item)">
+                        <a class="page-link">{{item+1}}</a>
                     </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
+                    <li class="page-item" ng-show="checkNext" ng-click="btnNext()">
+                        <a class="page-link" >Next</a>
                     </li>
                 </ul>
             </nav>

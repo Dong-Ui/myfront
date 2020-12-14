@@ -3,5 +3,5 @@ setTimeout(() => {
   $(document).ready(function() {
     $('#dataTable').DataTable();
   });
-}, 200);
+}, 500);
 

@@ -173,7 +173,6 @@ margin-bottom: 0;
     display:none ;
 }
 #save{
-    color: white;
     position: absolute;
     left: 0px;
     right: 0px;
@@ -182,11 +181,15 @@ margin-bottom: 0;
     cursor: pointer;
     box-sizing: unset;
 }
-#save > span {
-    padding: 0 10px;
+#save:hover{
+   font-size: 20px;
 }
-
 #blah{
     width: 160px;
     height: 160px;
 }
+
+#save > span {
+    padding: 0 10px;
+}
+

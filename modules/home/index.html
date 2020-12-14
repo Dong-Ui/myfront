@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Hello, world!</title>
+    <title>DREAM HOME</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, name=" viewport" />
@@ -36,7 +36,7 @@
         <div class="container" style="max-width: 90%;">
             <div class="navbar-translate mr-5">
                 <a class="navbar-brand " href="#">
-                    <img src="../../img/logo.png" alt=""></a>
+                    <img src="../../images/logo.png" alt=""></a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
                         <input type="text" class="form-control text-header" placeholder="Bạn muốn đi đâu?">
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                     <div class="input-group ">
                         <div class="input-group-prepend">
                             <span class="input-group-text text-header">
@@ -67,22 +67,33 @@
                         </div>
                         <input type="text" placeholder="dd/mm/yyyy" class="form-control datetimepicker text-header" />
                     </div>
-                </div>
+                </div> -->
+
                 <div class="col-sm-2">
-                    <button class="btn btn-primary btn-round">
-                        <i class="material-icons">favorite</i>
-                        Tìm kiếm</button>
+                    <button class="btn btn-primary btn-round">Tìm kiếm</button>
                 </div>
-                <ul class="navbar-nav ml-auto">
+
+                <ul class="navbar-nav ml-auto" ng-show="check_nav_user">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">person</i> Tài Khoản
+                            <i class="material-icons">person</i>Tài Khoản
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
+                            <a style="cursor: pointer;" class="dropdown-item" href="{{urlLogin}}">Đăng Nhập</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto" ng-hide="check_nav_user">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle user" href="javascript:;" id="navbarDropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">person</i>Xin Chào {{username_cus}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{urlProfile}}">Thông Tin Tài Khoản</a>
+                            <a style="cursor: pointer;" class="dropdown-item" ng-click="logOut()">Đăng Xuất</a>
                         </div>
                     </li>
                 </ul>
@@ -103,6 +114,7 @@
             </div>
         </div>
     </div>
+
     <script>
         $(function () {
             $('.datetimepicker').datetimepicker({
@@ -268,7 +280,7 @@
                 </div>
                 <div class="item position-relative">
                     <a href="{{provinces[40]['urlProvvince']}}" ng-click="redirect(provinces[40]['idProvince'])">
-                        <img class="rounded" src="/images/hcm.jpg" height="299" alt="">
+                        <img class="rounded" src="/images/hcmct.png" height="299" alt="">
                         <div class="position-absolute" style="bottom: 15px; margin-left: 20px;">
                             <h3 class="font-weight-bold text-light">{{provinces[40]['nameProvince']}}</h3>
                         </div>
@@ -276,7 +288,7 @@
                 </div>
                 <div class="item position-relative">
                     <a href="{{provinces[35]['urlProvvince']}}" ng-click="redirect(provinces[35]['idProvince'])">
-                        <img class="rounded" src="/images/da_lat.jpg" height="299" alt="">
+                        <img class="rounded" src="/images/da_lat_ct.jpg" height="299" alt="">
                         <div class="position-absolute" style="bottom: 15px; margin-left: 20px;">
                             <h3 class="font-weight-bold text-light">{{provinces[35]['nameProvince']}}</h3>
                         </div>
@@ -284,15 +296,13 @@
                 </div>
                 <div class="item position-relative">
                     <a href="{{provinces[22]['urlProvvince']}}" ng-click="redirect(provinces[22]['idProvince'])">
-                        <img class="rounded" src="/images/da_nang.jpg" height="299" alt="">
+                        <img class="rounded" src="/images/dn.png" height="299" alt="">
                         <div class="position-absolute" style="bottom: 15px; margin-left: 20px;">
                             <h3 class="font-weight-bold text-light">{{provinces[22]['nameProvince']}}</h3>
                         </div>
                     </a>
                 </div>
             </div>
-
-
 
             <h4 class="font-weight-bold mt-5">Các Ưu Đãi</h4>
             <div class="owl-carousel owl2 owl-theme">
@@ -3824,7 +3834,7 @@
             <div class="col-sm-6">
                 <div class="row margin-auto w-75">
                     <div class="col-sm-4 d-flex justify-content-center" style="padding: 0;">
-                        <img class="rounded-circle w-100 " src="../../img/logo2.png" alt="">
+                        <img class="rounded-circle w-100 " src="../../images/logo2.png" alt="">
                     </div>
                     <div class="col-sm-8 d-flex align-items-center " style="padding: 0;">
                         <h1 class="font-logo color-logo">DREAM HOME</h1>
@@ -3858,7 +3868,7 @@
             <div class="row">
                 <div class="col-sm-2 ">
                     <div class="col-sm-6 d-flex justify-content-center" style="padding: 0;">
-                        <img class="w-100 rounded-circle" src="../../img/logo2.png" alt="">
+                        <img class="w-100 rounded-circle" src="../../images/logo2.png" alt="">
                     </div>
                     <div class="">
                         <h4 class="d-flex justify-content-start">Liên Hệ 1</h4>

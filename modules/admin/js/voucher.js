@@ -1,27 +1,49 @@
 var app = angular.module("WebApp", []);
-app.controller("cardCtrl", function ($scope, $http) {
+app.controller("voucherCtrl", function ($scope, $http) {
     $scope.listAll = [];
-    $scope.post = {}
-    $scope.table = false;
+    $scope.voucher = {};
+    $scope.table = true;
     $scope.load = function () {
         $http({
             method: "GET",
-            url: "http://localhost:8080/posts",
+            url: "http://localhost:8080/vouchers",
         }).then(function (response) {
             $scope.listAll = response.data;
+            $scope.listAll.forEach(element => {
+                element.discount = Number(element.discount.replace("%", ""));
+            });
             console.log($scope.listAll)
         }, function (error) {
             console.log(error);
         })
     }
     $scope.load();
+    $scope.add = function () {
+        $scope.messagedelete = "";
+        $scope.table = false;
+        var i = $scope.listAll[$scope.listAll.length - 1]["_idVoucher"].indexOf("C");
+        var u = $scope.listAll[$scope.listAll.length - 1]["_idVoucher"].length
+        if($scope.listAll[$scope.listAll.length - 1]["_idVoucher"].substring(i+1,u).search("0") == 0){
+            var z = Number($scope.listAll[$scope.listAll.length - 1]["_idVoucher"].substring(i+2,u))
+            $scope.voucher._idVoucher = "CV0" +(z+1);
+        } else {
+            var z = Number($scope.listAll[$scope.listAll.length - 1]["_idVoucher"].substring(i+1,u))    
+            $scope.voucher._idVoucher = "VC" +(z+1);
+        }
+    }
+
+    $scope.back = function () {
+        $scope.table = true;
+        $scope.voucher = {}
+    }
     $scope.submit = function () {
-        $scope.post.admins = $scope.admin;
-        console.log($scope.post)
+        $scope.voucher.admins = $scope.admin;
+        $scope.voucher.discount = ($scope.voucher.discount + "%").toString();
+        console.log($scope.voucher)
         $http({
             method: 'POST',
-            url: 'http://localhost:8080/posts/new',
-            data: JSON.stringify($scope.post)
+            url: 'http://localhost:8080/vouchers/new',
+            data: JSON.stringify($scope.voucher)
         }).then(function (response) {
             console.log(response)
             $scope.message = "Lưu thành công!"
@@ -32,10 +54,18 @@ app.controller("cardCtrl", function ($scope, $http) {
         });
     }
 
-    $scope.delete = function(item){
+    $scope.edit = function (item) {
+        $scope.table = false;
+        $scope.voucher = item;    
+        console.log($scope.voucher.endDate)
+        var date = new Date($scope.voucher.endDate);
+        $scope.voucher.endDate = date;
+    }
+   
+    $scope.delete = function (item) {
         $http({
             method: 'POST',
-            url: 'http://localhost:8080/posts/delete',
+            url: 'http://localhost:8080/vouchers/delete',
             data: JSON.stringify(item),
             transformResponse: [
                 function (data) {
@@ -50,18 +80,8 @@ app.controller("cardCtrl", function ($scope, $http) {
             console.log(error);
         });
     }
-    $scope.add = function () {
-        $scope.messagedelete = "";
-        $scope.table = true;
-        $scope.post.idPost = Number($scope.listAll[$scope.listAll.length - 1]["idPost"]) + 1;
-        // $scope.post.postDate = new Date().toLocaleDateString()
-        $scope.post.postDate = new Date()
-        console.log( $scope.post.postDate)
-    }
-    $scope.back = function () {
-        $scope.table = false;
-        $scope.post = {}
-    }
+
+
     $scope.allAdmin = [];
     $scope.getallAdmin = function () {
         $http({

@@ -8,22 +8,27 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="login.css" />
-  <title>Sign in & Sign up Form</title>
+
+  <!-- Angular -->
+  <script src="/js/angular.min.js"></script>
+
+  <title>Sign in & Sign up</title>
 </head>
 
-<body>
+<body ng-app="WebApp" ng-controller="loginCtrl">
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-        <form action="#" class="sign-in-form">
+
+        <form class="sign-in-form" ng-submit="submit()">
           <h2 class="title">Sign in</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" />
+            <input type="text" ng-model="userName" placeholder="Username" />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" />
+            <input type="password" ng-model="passWord" placeholder="Password" />
           </div>
           <input type="submit" value="Login" class="btn solid" />
           <div class="form-check">
@@ -31,52 +36,32 @@
                 data-target="#exampleModal" href="">Nhấn vào
                 đây</a></label>
           </div>
-          <p class="social-text">Or Sign in with social platforms</p>
-          <div class="social-media">
-            <a href="#" class="social-icon">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-google"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-          </div>
         </form>
-        <form action="#" class="sign-up-form">
+
+        <form ng-submit="regist()" class="sign-up-form">
           <h2 class="title">Sign up</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" />
+            <input ng-model="newUserName" type="text" placeholder="Username" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input ng-model="newFullName" type="text" placeholder="Fullname" />
           </div>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" />
+            <input ng-model="email" type="email" placeholder="Email" />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" />
+            <input ng-model="newPassWord" type="password" placeholder="Password" />
           </div>
-          <input type="submit" class="btn" value="Sign up" />
-          <p class="social-text">Or Sign up with social platforms</p>
-          <div class="social-media">
-            <a href="#" class="social-icon">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-google"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input ng-model="cnfPassWord" type="password" placeholder="Confirm Password" />
           </div>
+          <input type="submit" class="btn" value="Sign up" data-toggle="modal"
+          data-target="#modelNotification"/>
         </form>
       </div>
     </div>
@@ -124,19 +109,45 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Vui lòng nhập địa chỉ email được liên kết với tài khoản Dream Home để nhận lại mật khẩu</p>
-          <div class="input-field m-auto">
-            <i class="fas fa-envelope"></i>
-            <input type="text" placeholder="Email" />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary m-auto" data-dismiss="modal">Gửi</button>
+          <p>Vui lòng nhập UserName và địa chỉ email được liên kết với tài khoản Dream Home để nhận lại mật khẩu.</p>
+          
+          <form action="" ng-submit="forgotPass()">
+            <div class="input-field m-auto">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="UserName" ng-model="userFogot"/>
+            </div>
+            <br>
+            <div class="input-field m-auto">
+              <i class="fas fa-envelope"></i>
+              <input type="text" placeholder="Email" ng-model="emailFogot"/>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-secondary m-auto" data-toggle="modal"
+            data-target="#modelNotification" class="btn" value="Gửi"></input>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  <script src="app.js"></script>
+
+  <!--Notification-->
+  <div class="modal fade" id="modelNotification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modelNotification">Thông Báo</h4>         
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{notification}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="login.js"></script>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
